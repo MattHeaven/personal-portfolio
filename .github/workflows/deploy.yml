@@ -1,0 +1,24 @@
+name: Deploy Static Out Folder to GitHub Pages
+
+on:
+  push:
+    branches: [main] # or your default branch
+  workflow_dispatch: # allows manual deploys from GitHub UI
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: 🚀 Deploy Out Folder to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./out
+          publish_branch: gh-pages
